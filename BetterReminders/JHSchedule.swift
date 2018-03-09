@@ -117,8 +117,8 @@ class JHSchedule: NSObject, NSCoding {
     internal func totalTimeToComplete() -> (Int, Int) {
         var totalHours = 0
         var totalMinutes = 0
-        for c in classes {
-            let (hour, minute) = c.timeToCompleteTasks()
+        for class in classes {
+            let (hour, minute) = class.timeToCompleteTasks()
             totalHours += hour
             totalMinutes += minute
         }
@@ -135,20 +135,20 @@ class JHSchedule: NSObject, NSCoding {
         - parameter index: Class to be saved
     */
     internal func saveTaskForClass(task: JHTask, class c: JHTask){
-        for clas in classes {
-            if clas.id == c.id {
+        for class in classes {
+            if class.id == c.id {
                 var index = 0
-                for t in clas.tasks {
+                for t in class.tasks {
                     if t.id == task.id {
                         //save task
-                        clas.tasks[index] = task
+                        class.tasks[index] = task
                         break
                     }
                     index += 1
                 }
                 //Class doesnt have a task with taht id so add a new one
                 if index == 0 {
-                    clas.tasks.append(task)
+                    class.tasks.append(task)
                 }
             }
         }
